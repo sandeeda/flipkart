@@ -1,0 +1,60 @@
+package com.flipkart.orders.service.impl;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.flipkart.orders.entity.Item;
+import com.flipkart.orders.entity.Order;
+import com.flipkart.orders.repository.OrderRepository;
+import com.flipkart.orders.service.OrderService;
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+	private OrderRepository orderRepository;
+	
+	@Override
+	public Order addOrder(Order order) {
+		return orderRepository.save(order);
+	}
+
+	@Override
+	public void deleteOrder(Order order) {
+		orderRepository.delete(order);
+	}
+
+	@Override
+	public Order editOrder(Order order) {
+		return orderRepository.save(order);
+	}
+
+	@Override
+	public Order getOrderById(int orderId) {
+		Optional<Order> optionalOrder=orderRepository.findById(orderId);
+		if(optionalOrder.isPresent())
+			return optionalOrder.get();
+		return null;
+	}
+
+	@Override
+	public List<Order> getOrderByCustomerId(int orderCustomerId) {
+		return null;
+	}
+
+	@Override
+	public List<Order> getOrderByDate(LocalDate date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Item> addItemByOrderId(Item item, int orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

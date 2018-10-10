@@ -1,0 +1,30 @@
+package com.flipkart.orders.entity;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="orders")
+public class Order {
+	
+	@Id
+	private int orderId;
+	private double orderTotal;
+	private LocalDate orderDate;
+	private int orderCustomerId;
+	@OneToMany
+	private List<Item> orderLineItems=new ArrayList<Item>();
+	
+		
+		
+	
+}

@@ -1,0 +1,69 @@
+package com.flipkart.orders.service.impl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.flipkart.orders.entity.Order;
+import com.flipkart.orders.repository.OrderRepository;
+import com.flipkart.orders.service.OrderService;
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Override
+	public List<Order> getOrders() {
+		// TODO Auto-generated method stub
+		return orderRepository.findAll();
+	}
+
+	@Override
+	public Order getOrderByCustomerId(int customerId) {
+		// TODO Auto-generated method stub
+		return orderRepository.findByOrderCustomerId(customerId);
+	}
+
+	@Override
+	public Order getOrder(int orderId) {
+		// TODO Auto-generated method stub
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+		if(optionalOrder.isPresent())
+			return optionalOrder.get();
+		return null;
+	}
+
+	@Override
+	public void submitOrder(Order order) {
+		// TODO Auto-generated method stub
+		order.setStatus("PROCESSING");
+		orderRepository.save(order);
+	}
+
+	@Override
+	public void updateOrder(Order order) {
+		// TODO Auto-generated method stub
+		Order dummyOrder=getOrder(orderId);
+		dummyOrder.setStatus("COMPLETED");
+		orderRepository.save(dummyOrder);	}
+
+	@Override
+	public void deleteOrder(int orderId) {
+		// TODO Auto-generated method stub
+		Order dummyOrder=getOrder(orderId);
+		dummyOrder.setStatus("DELETE");
+		orderRepository.save(dummyOrder);
+	}
+
+	@Override
+	public void cancelOrder(int customerId) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,19 @@
+package com.flipkart.orders.service;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.flipkart.orders.entity.Item;
+import com.flipkart.orders.entity.Order;
+
+public interface OrderService {
+
+	public Order addOrder(Order order);
+
+	public void deleteOrder(Order order);
+	public Order editOrder(Order order);
+	public Order getOrderById(int orderId);
+	public List<Order> getOrderByCustomerId(int orderCustomerId);
+	public List<Order> getOrderByDate(LocalDate date);
+	public List<Item> addItemByOrderId(Item item,int orderId);
+}

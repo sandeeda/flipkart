@@ -1,0 +1,10 @@
+package com.flipkart.items.service;
+
+import com.flipkart.items.entity.Orders;
+
+public interface OrderService {
+	
+public Orders addOrder(Orders order);
+
+	public Order addOrder(Order order)
+}

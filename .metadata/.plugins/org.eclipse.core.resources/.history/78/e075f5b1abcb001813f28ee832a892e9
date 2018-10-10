@@ -1,0 +1,5 @@
+package com.flipkart.items.entity;
+
+public class Item {
+
+}

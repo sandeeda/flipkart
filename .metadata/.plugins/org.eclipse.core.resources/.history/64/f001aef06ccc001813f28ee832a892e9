@@ -1,0 +1,66 @@
+package com.flipkart.orders.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.flipkart.orders.entity.Item;
+import com.flipkart.orders.entity.Order;
+import com.flipkart.orders.service.OrderService;
+
+@RestController
+public class OrderController {
+
+	private HashMap<Integer, Set<Item>> customerCart;
+	public OrderController() {
+		customerCart = new HashMap<>();
+	}
+
+	@Autowired
+	private OrderService orderService;
+	
+	@PostMapping("/addtocart/{customerId}")
+	public ResponseEntity<Set<Item>> addToCart(@PathVariable int customerId,@RequestBody Item item)
+	{
+		Set<Item> sampleItem = customerCart.get(customerId);
+		if(sampleItem==null)
+		{
+			sampleItem = new HashSet<>();
+			sampleItem.add(item);
+			customerCart.put(customerId, sampleItem);
+		}
+		else
+		{
+			sampleItem.add(item);
+			customerCart.put(customerId, sampleItem);
+		}
+		ResponseEntity<Set<Item>> responseEntity = new ResponseEntity<Set<Item>>(sampleItem,HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	
+	@GetMapping("/getcartitems/{customerId}")
+	public ResponseEntity<Set<Item>> getCartItems(@PathVariable int customerId)
+	{
+		Set<Item> sampleItem = customerCart.get(customerId);
+		ResponseEntity<Set<Item>> responseEntity = new ResponseEntity<Set<Item>>(sampleItem, HttpStatus.OK);
+		return responseEntity;
+	}
+	
+	
+	
+	
+	
+}

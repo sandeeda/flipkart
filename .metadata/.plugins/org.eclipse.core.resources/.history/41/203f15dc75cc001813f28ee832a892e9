@@ -1,0 +1,17 @@
+package com.flipkart.orders.service;
+
+import java.util.List;
+
+import com.flipkart.orders.entity.Order;
+
+public interface OrderService {
+
+	public List<Order> getOrders();
+	public Order getOrderByCustomerId(int customerId);
+	public Order getOrder(int orderId);
+	public void submitOrder(Order order);
+	public void updateOrder(Order order);
+	public void deleteOrder(int customerId);
+	public void cancelOrder(int customerId);
+	
+}

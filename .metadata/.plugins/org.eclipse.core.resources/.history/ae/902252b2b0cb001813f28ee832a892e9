@@ -1,0 +1,5 @@
+package com.flipkart.items.repository;
+
+public interface OrderRepository {
+
+}
